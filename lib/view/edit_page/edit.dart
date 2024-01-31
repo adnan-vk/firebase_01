@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class AddPage extends StatelessWidget {
-  const AddPage({super.key});
+class EditPage extends StatelessWidget {
+  const EditPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class AddPage extends StatelessWidget {
               style: const ButtonStyle(
                   minimumSize:
                       MaterialStatePropertyAll(Size(double.infinity, 50))),
-              child: const Text("SUBMIT"),
+              child: const Text("UPDATE"),
             ),
           ],
         ),
