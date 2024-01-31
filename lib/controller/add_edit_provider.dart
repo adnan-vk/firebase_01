@@ -7,7 +7,7 @@ class AddEditProvider extends ChangeNotifier{
   List listItems = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
   var selectedgroup = "A+";
 
-  Future AddDonor(BloodModel data)async{
+  Future addDonor(BloodModel data)async{
     await dbService.donor.add(data);
     notifyListeners();
   }

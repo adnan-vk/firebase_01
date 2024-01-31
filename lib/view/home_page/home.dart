@@ -6,6 +6,7 @@ import 'package:practice/controller/home_provider.dart';
 import 'package:practice/model/model.dart';
 import 'package:practice/view/add_page/add_page.dart';
 import 'package:practice/view/edit_page/edit.dart';
+import 'package:practice/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,7 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.red,
+        centerTitle: true,
+        title: const Text('Donor List'),
+      ),
       body: Consumer<HomeProvider>(
         builder: (context, value, child) => StreamBuilder(
           stream: value.getdatas(),
@@ -31,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (snapshot.hasError) {
               return Center(
-                child: Text("error : ${snapshot.error}"),
+                child: text(data: "Error: ${snapshot.error}"),
               );
             }
             List<QueryDocumentSnapshot<BloodModel>> donordetail =
@@ -40,45 +45,43 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: donordetail.length,
               itemBuilder: (context, index) {
                 BloodModel donor = donordetail[index].data();
-                final id = donordetail[index].id;
-                return Card(
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        child: Text(
-                          donor.group ?? 'na',
-                          style: const TextStyle(fontSize: 30),
-                        ),
-                        radius: 40,
+                // final id = donordetail[index].id;
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
+                  ),
+                  child: Card(
+                    elevation: 3,
+                    child: ListTile(
+                      leading: circeavatar(
+                        color: Colors.red,
+                        child: text(data: donor.group, size: 20.0),
+                        radius: 30.0,
                       ),
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
+                      title: text(data: donor.name, size: 16.0),
+                      subtitle: text(data: donor.phone.toString(), size: 14.0),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(donor.name!),
-                          Text(donor.phone.toString()),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const EditPage(),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.edit,color: Colors.blue,),
+                          ),
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.delete,color: Colors.red,),
+                          ),
                         ],
                       ),
-                      Align(
-                        child: Row(
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const EditPage(),
-                                      ));
-                                },
-                                icon: const Icon(Icons.edit)),
-                            IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.delete)),
-                          ],
-                        ),
-                      )
-                    ],
+                    ),
                   ),
                 );
               },
@@ -87,6 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.red,
         onPressed: () {
           Navigator.push(
             context,
