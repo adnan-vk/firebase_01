@@ -20,7 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<AddEditProvider>(context,listen: false);
+    final pro = Provider.of<AddEditProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -71,17 +71,26 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>  EditPage(donor: donor, id: id,),
+                                  builder: (context) => EditPage(
+                                    donor: donor,
+                                    id: id,
+                                  ),
                                 ),
                               );
                             },
-                            icon: const Icon(Icons.edit,color: Colors.blue,),
+                            icon: const Icon(
+                              Icons.edit,
+                              color: Colors.blue,
+                            ),
                           ),
                           IconButton(
                             onPressed: () {
                               pro.delete(id);
                             },
-                            icon: const Icon(Icons.delete,color: Colors.red,),
+                            icon: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
                           ),
                         ],
                       ),
