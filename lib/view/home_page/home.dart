@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:practice/controller/add_edit_provider.dart';
 import 'package:practice/controller/home_provider.dart';
 import 'package:practice/model/model.dart';
 import 'package:practice/view/add_page/add_page.dart';
@@ -19,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final pro = Provider.of<AddEditProvider>(context,listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -76,7 +78,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             icon: const Icon(Icons.edit,color: Colors.blue,),
                           ),
                           IconButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              pro.delete(id);
+                            },
                             icon: const Icon(Icons.delete,color: Colors.red,),
                           ),
                         ],

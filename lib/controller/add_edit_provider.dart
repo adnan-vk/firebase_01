@@ -16,4 +16,9 @@ class AddEditProvider extends ChangeNotifier{
     dbService.donor.doc(id).update(donors.tojson());
     notifyListeners();
   }
+
+  delete(id){
+    dbService.donor.doc(id).delete();
+    notifyListeners();
+  }
 }
