@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-textformfield({controller,label,texttype}){
+textformfield({controller,label,texttype,data,style}){
   return TextFormField(
     controller: controller,
     decoration: InputDecoration(
+      prefixText: data,
+      prefixStyle: style,
       labelText: label,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(20)

@@ -28,7 +28,11 @@ class AddPage extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            textformfield(controller: phonecontroller, label: "Enter The Phone Number",texttype: TextInputType.number,),
+            textformfield(
+                controller: phonecontroller,
+                label: "Enter The Phone Number",
+                texttype: TextInputType.number,
+                data: "+91 "),
             sizedbox(height: 20.0),
             DropdownButtonFormField(
               value: Provider.of<AddEditProvider>(context).selectedgroup,
@@ -66,11 +70,10 @@ class AddPage extends StatelessWidget {
     final pro = Provider.of<AddEditProvider>(context, listen: false);
 
     final name = namecontroller.text;
-    final phoneText = phonecontroller.text.trim();
-    final phone = int.tryParse(phoneText);
+    final phone = int.tryParse(phonecontroller.text.trim());
 
     if (phone == null) {
-      log("Invalid phone number input: $phoneText");
+      log("Invalid phone number input: $phone");
       return;
     }
 

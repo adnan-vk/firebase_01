@@ -11,4 +11,9 @@ class AddEditProvider extends ChangeNotifier{
     await dbService.donor.add(data);
     notifyListeners();
   }
+
+  updatedonor(id, BloodModel donors)async{
+    dbService.donor.doc(id).update(donors.tojson());
+    notifyListeners();
+  }
 }

@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemCount: donordetail.length,
               itemBuilder: (context, index) {
                 BloodModel donor = donordetail[index].data();
-                // final id = donordetail[index].id;
+                final id = donordetail[index].id;
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 15,
@@ -69,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const EditPage(),
+                                  builder: (context) =>  EditPage(donor: donor, id: id,),
                                 ),
                               );
                             },
