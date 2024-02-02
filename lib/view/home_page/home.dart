@@ -51,48 +51,50 @@ class HomeScreen extends StatelessWidget {
                   child: Card(
                     elevation: 3,
                     child: ListTile(
-                      leading: circeavatar(
-                        color: Colors.red,
-                        child: text(data: donor.group, size: 20.0),
-                        radius: 30.0,
-                      ),
-                      title: text(data: donor.name, size: 16.0),
-                      subtitle: text(data: donor.phone.toString(), size: 14.0),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          text(
-                              data: "Age : ${donor.age.toString()}",
-                              size: 14.0),
-                          IconButton(
-                            onPressed: () {
+                        leading: circeavatar(
+                          color: Colors.red,
+                          child: text(data: donor.group, size: 20.0),
+                          radius: 30.0,
+                        ),
+                        title: text(data: donor.name, size: 16.0),
+                        subtitle: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            children: [
+                              sizedbox(height: 10.0),
+                              text(data: donor.phone.toString(), size: 14.0),
+                              sizedbox(height: 10.0),
+                              text(data: "Age : ${donor.age.toString()}")
+                            ],
+                          ),
+                        ),
+                        trailing: PopupMenuButton(
+                          onSelected: (value) {
+                            if (value == 'edit') {
                               Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => EditPage(
-                                    donor: donor,
-                                    id: id,
-                                  ),
-                                ),
-                              );
-                            },
-                            icon: const Icon(
-                              Icons.edit,
-                              color: Colors.blue,
-                            ),
-                          ),
-                          IconButton(
-                            onPressed: () {
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        EditPage(donor: donor, id: id),
+                                  ));
+                            } else if (value == "delete") {
                               pro.delete(id);
-                            },
-                            icon: const Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                            }
+                            ;
+                          },
+                          itemBuilder: (context) {
+                            return [
+                              PopupMenuItem(
+                                child: text(data: "edit"),
+                                value: "edit",
+                              ),
+                              PopupMenuItem(
+                                child: text(data: "DELETE"),
+                                value: "delete",
+                              ),
+                            ];
+                          },
+                        )),
                   ),
                 );
               },

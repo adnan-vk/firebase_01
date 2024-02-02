@@ -32,10 +32,11 @@ sizedbox({height, width}) {
   );
 }
 
-circeavatar({child, radius, color}) {
+circeavatar({child, radius, color,image}) {
   return CircleAvatar(
     child: child,
     radius: radius,
     backgroundColor: color,
+    backgroundImage: image,
   );
 }
