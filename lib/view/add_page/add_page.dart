@@ -12,6 +12,7 @@ class AddPage extends StatelessWidget {
 
   TextEditingController namecontroller = TextEditingController();
   TextEditingController phonecontroller = TextEditingController();
+  TextEditingController agecontroller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,15 @@ class AddPage extends StatelessWidget {
                 controller: phonecontroller,
                 label: "Enter The Phone Number",
                 texttype: TextInputType.number,
+                max: 10,
                 data: "+91 "),
+            sizedbox(height: 20.0),
+            textformfield(
+              controller: agecontroller,
+              label: "Enter The Your age",
+              texttype: TextInputType.number,
+              max: 2,
+            ),
             sizedbox(height: 20.0),
             DropdownButtonFormField(
               value: Provider.of<AddEditProvider>(context).selectedgroup,
@@ -69,19 +78,16 @@ class AddPage extends StatelessWidget {
   addData(context) {
     final pro = Provider.of<AddEditProvider>(context, listen: false);
 
-    final name = namecontroller.text;
+    final name = namecontroller.text.trim();
     final phone = int.tryParse(phonecontroller.text.trim());
+    final age = int.tryParse(agecontroller.text.trim());
 
     if (phone == null) {
       log("Invalid phone number input: $phone");
       return;
     }
-
-    log("Name: $name");
-    log("Phone: $phone");
-    log(pro.selectedgroup);
-
-    final data = BloodModel(name: name, phone: phone, group: pro.selectedgroup);
+    final data = BloodModel(
+        name: name, phone: phone, group: pro.selectedgroup, age: age);
     pro.addDonor(data);
   }
 }

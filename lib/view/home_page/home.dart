@@ -10,14 +10,9 @@ import 'package:practice/view/edit_page/edit.dart';
 import 'package:practice/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final pro = Provider.of<AddEditProvider>(context, listen: false);
@@ -66,6 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       trailing: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          text(
+                              data: "Age : ${donor.age.toString()}",
+                              size: 14.0),
                           IconButton(
                             onPressed: () {
                               Navigator.push(

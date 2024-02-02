@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-textformfield({controller, label, texttype, data, style}) {
+textformfield({controller, label, texttype, data, style, max}) {
   return TextFormField(
     controller: controller,
     decoration: InputDecoration(
@@ -10,6 +10,7 @@ textformfield({controller, label, texttype, data, style}) {
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
     ),
     keyboardType: texttype,
+    maxLength: max,
   );
 }
 
