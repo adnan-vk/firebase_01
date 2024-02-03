@@ -34,18 +34,18 @@ class AddPage extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  pickimage();
-                },
-                child:
-                    circeavatar(
-                      image: pickedImage!=null ? FileImage(pickedImage!) :
-                      AssetImage('assets/images/Blood Logo.jpg'),
-                      radius: 50.0 
-                      // Icon(Icons.add_a_photo), radius: 50.0
-                      ),
-              ),
+              // GestureDetector(
+              //   onTap: () {
+              //     pickimage();
+              //   },
+              //   child:
+              //       circeavatar(
+              //         image: pickedImage!=null ? FileImage(pickedImage!) :
+              //         AssetImage('assets/images/Blood Logo.jpg'),
+              //         radius: 50.0 
+              //         // Icon(Icons.add_a_photo), radius: 50.0
+              //         ),
+              // ),
               sizedbox(height: 20.0),
               textformfield(
                   controller: namecontroller, label: "Enter your Name"),
