@@ -1,7 +1,5 @@
-// ignore_for_file: sort_child_properties_last
-
-import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:practice/controller/add_edit_provider.dart';
 import 'package:practice/controller/home_provider.dart';
 import 'package:practice/model/model.dart';
@@ -49,52 +47,54 @@ class HomeScreen extends StatelessWidget {
                     vertical: 10,
                   ),
                   child: Card(
-                    elevation: 3,
+                    elevation: 5,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
                     child: ListTile(
-                        leading: circeavatar(
-                          color: Colors.red,
-                          child: text(data: donor.group, size: 20.0),
-                          radius: 30.0,
-                        ),
-                        title: text(data: donor.name, size: 16.0),
-                        subtitle: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              sizedbox(height: 10.0),
-                              text(data: donor.phone.toString(), size: 14.0),
-                              sizedbox(height: 10.0),
-                              text(data: "Age : ${donor.age.toString()}")
-                            ],
-                          ),
-                        ),
-                        trailing: PopupMenuButton(
-                          onSelected: (value) {
-                            if (value == 'edit') {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        EditPage(donor: donor, id: id),
-                                  ));
-                            } else if (value == "delete") {
-                              pro.delete(id);
-                            }
-                            ;
-                          },
-                          itemBuilder: (context) {
-                            return [
-                              PopupMenuItem(
-                                child: text(data: "edit"),
-                                value: "edit",
+                      contentPadding: EdgeInsets.all(15),
+                      leading: circeavatar(
+                        color: Colors.red,
+                        child: text(data: donor.group, size: 20.0),
+                        radius: 30.0,
+                      ),
+                      title: text(data: donor.name, size: 18.0),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          sizedbox(height: 5.0),
+                          text(data: 'Phone: ${donor.phone.toString()}', size: 14.0),
+                          sizedbox(height: 5.0),
+                          text(data: 'Age: ${donor.age.toString()}', size: 14.0),
+                        ],
+                      ),
+                      trailing: PopupMenuButton(
+                        onSelected: (value) {
+                          if (value == 'edit') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EditPage(donor: donor, id: id),
                               ),
-                              PopupMenuItem(
-                                child: text(data: "DELETE"),
-                                value: "delete",
-                              ),
-                            ];
-                          },
-                        )),
+                            );
+                          } else if (value == "delete") {
+                            pro.delete(id);
+                          }
+                        },
+                        itemBuilder: (context) {
+                          return [
+                            PopupMenuItem(
+                              child: text(data: "Edit"),
+                              value: "edit",
+                            ),
+                            PopupMenuItem(
+                              child: text(data: "Delete"),
+                              value: "delete",
+                            ),
+                          ];
+                        },
+                      ),
+                    ),
                   ),
                 );
               },
