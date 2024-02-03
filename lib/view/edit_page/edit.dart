@@ -26,7 +26,7 @@ class _EditPageState extends State<EditPage> {
     namecontroller = TextEditingController(text: widget.donor.name);
     phonecontroller =
         TextEditingController(text: widget.donor.phone.toString());
-        agecontroller = TextEditingController(text: widget.donor.age.toString());
+    agecontroller = TextEditingController(text: widget.donor.age.toString());
   }
 
   @override
@@ -90,8 +90,8 @@ class _EditPageState extends State<EditPage> {
     final phone = int.parse(phonecontroller.text.trim());
     final age = int.tryParse(agecontroller.text.trim());
 
-    final updated =
-        BloodModel(name: name, phone: phone, group: pro.selectedgroup, age: age);
+    final updated = BloodModel(
+        name: name, phone: phone, group: pro.selectedgroup, age: age);
     pro.updatedonor(widget.id, updated);
     Navigator.pop(context);
   }

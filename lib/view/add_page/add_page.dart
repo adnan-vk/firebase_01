@@ -16,13 +16,11 @@ class AddPage extends StatelessWidget {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController agecontroller = TextEditingController();
 
-  late ImagePicker _imagePicker; 
+  late ImagePicker _imagePicker;
   File? pickedImage;
 
   @override
   Widget build(BuildContext context) {
-    
-
     _imagePicker = ImagePicker();
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +40,7 @@ class AddPage extends StatelessWidget {
               //       circeavatar(
               //         image: pickedImage!=null ? FileImage(pickedImage!) :
               //         AssetImage('assets/images/Blood Logo.jpg'),
-              //         radius: 50.0 
+              //         radius: 50.0
               //         // Icon(Icons.add_a_photo), radius: 50.0
               //         ),
               // ),
@@ -115,13 +113,13 @@ class AddPage extends StatelessWidget {
     pro.addDonor(data);
   }
 
-  void pickimage()async{
+  void pickimage() async {
     final pickFile = await _imagePicker.pickImage(source: ImageSource.gallery);
 
-    if(pickFile!=null){
+    if (pickFile != null) {
       pickedImage = File(pickFile.path);
       log("image picked");
-    }else{
+    } else {
       log("image not picked");
     }
   }

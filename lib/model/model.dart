@@ -4,14 +4,17 @@ class BloodModel {
   int? age;
   String? group;
 
-  BloodModel({this.name, this.phone, this.group,this.age});
+  BloodModel({this.name, this.phone, this.group, this.age});
 
   factory BloodModel.fromJsoon(Map<String, dynamic> json) {
     return BloodModel(
-        group: json['group'], name: json['name'], phone: json['phone'], age: json['age']);
+        group: json['group'],
+        name: json['name'],
+        phone: json['phone'],
+        age: json['age']);
   }
 
   Map<String, dynamic> tojson() {
-    return {"name": name, "phone": phone, "group": group, "age" : age};
+    return {"name": name, "phone": phone, "group": group, "age": age};
   }
 }
