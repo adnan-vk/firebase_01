@@ -92,7 +92,7 @@ class _EditPageState extends State<EditPage> {
 
     final updated = BloodModel(
         name: name, phone: phone, group: pro.selectedgroup, age: age);
-    pro.updatedonor(widget.id, updated);
+    pro.updatedonor(updated ,widget.id);
     Navigator.pop(context);
   }
 }

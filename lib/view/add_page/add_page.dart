@@ -1,7 +1,5 @@
 // ignore_for_file: must_be_immutable
 import 'dart:developer';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:practice/controller/add_edit_provider.dart';
@@ -19,7 +17,6 @@ class AddPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final pro = Provider.of<ImgProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -33,7 +30,7 @@ class AddPage extends StatelessWidget {
               Consumer<ImgProvider>(
                 builder: (context, value, child) => GestureDetector(
                   onTap: () {
-                    pro.pickImage(context);
+                    pickImage(context);
                   },
                   child: circeavatar(
                     image: value.pickedImage != null
@@ -100,6 +97,7 @@ class AddPage extends StatelessWidget {
 
   addData(context) {
     final pro = Provider.of<AddEditProvider>(context, listen: false);
+    final proim = Provider.of<ImgProvider>(context, listen: false);
 
     final name = namecontroller.text.trim();
     final phone = int.tryParse(phonecontroller.text.trim());
@@ -110,7 +108,40 @@ class AddPage extends StatelessWidget {
       return;
     }
     final data = BloodModel(
-        name: name, phone: phone, group: pro.selectedgroup, age: age);
+        image: proim.downloadUrl,
+        name: name,
+        phone: phone,
+        group: pro.selectedgroup,
+        age: age);
+    log("url is: ${proim.downloadUrl}");
     pro.addDonor(data);
+  }
+
+  pickImage(context) {
+    final pro = Provider.of<ImgProvider>(context, listen: false);
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          title: Text("Select Image Source"),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                pro.getImage(ImageSource.camera);
+              },
+              child: const Text("Camera"),
+            ),
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                pro.getImage(ImageSource.gallery);
+              },
+              child: const Text("Gallery"),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

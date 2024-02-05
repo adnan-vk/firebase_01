@@ -36,38 +36,12 @@ class ImgProvider extends ChangeNotifier {
   }
 
   getImage(ImageSource source) async {
-    final pickedfile = await picker.pickImage(source: source);
+    final pickedFile = await picker.pickImage(source: source);
 
-    if (pickedfile != null) {
-      pickedImage = File(pickedfile.path);
+    if (pickedFile != null) {
+      pickedImage = File(pickedFile.path);
       log("image picked");
+      notifyListeners();
     }
-  }
-
-  pickImage(context) {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return SimpleDialog(
-          title: Text("Select Image Source"),
-          children: [
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context);
-                getImage(ImageSource.camera);
-              },
-              child: const Text("Camera"),
-            ),
-            SimpleDialogOption(
-              onPressed: () {
-                Navigator.pop(context);
-                getImage(ImageSource.gallery);
-              },
-              child: const Text("Gallery"),
-            ),
-          ],
-        );
-      },
-    );
   }
 }
