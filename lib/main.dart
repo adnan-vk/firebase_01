@@ -29,7 +29,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AddEditProvider(),
         ),
-        ChangeNotifierProvider(create: (context) => ImgProvider(),)
+        ChangeNotifierProvider(
+          create: (context) => ImgProvider(),
+        )
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

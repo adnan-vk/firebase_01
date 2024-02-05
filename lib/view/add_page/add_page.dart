@@ -15,6 +15,8 @@ class AddPage extends StatelessWidget {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController agecontroller = TextEditingController();
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,73 +24,79 @@ class AddPage extends StatelessWidget {
         backgroundColor: Colors.red,
         title: text(data: "ADD DETAILS"),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10),
-          child: Column(
-            children: [
-              Consumer<ImgProvider>(
-                builder: (context, value, child) => GestureDetector(
-                  onTap: () {
-                    pickImage(context);
-                  },
-                  child: circeavatar(
-                    image: value.pickedImage != null
-                        ? FileImage(value.pickedImage!)
-                        : null,
-                    radius: 50.0,
-                    color: Colors.red,
-                    child: Icon(Icons.add_a_photo),
+      body: Form(
+        key: formKey,
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Consumer<ImgProvider>(
+                  builder: (context, value, child) => GestureDetector(
+                    onTap: () {
+                      pickImage(context);
+                    },
+                    child: circeavatar(
+                      image: value.pickedImage != null
+                          ? FileImage(value.pickedImage!)
+                          : null,
+                      radius: 50.0,
+                      color: Colors.red,
+                      child: Icon(Icons.add_a_photo),
+                    ),
                   ),
                 ),
-              ),
-              sizedbox(height: 20.0),
-              textformfield(
-                  controller: namecontroller, label: "Enter your Name"),
-              const SizedBox(
-                height: 20,
-              ),
-              textformfield(
-                  controller: phonecontroller,
-                  label: "Enter The Phone Number",
+                sizedbox(height: 20.0),
+                textformfield(
+                    controller: namecontroller, label: "Enter your Name"),
+                const SizedBox(
+                  height: 20,
+                ),
+                textformfield(
+                    controller: phonecontroller,
+                    label: "Enter The Phone Number",
+                    texttype: TextInputType.number,
+                    max: 10,
+                    data: "+91 "),
+                sizedbox(height: 20.0),
+                textformfield(
+                  controller: agecontroller,
+                  label: "Enter Your age",
                   texttype: TextInputType.number,
-                  max: 10,
-                  data: "+91 "),
-              sizedbox(height: 20.0),
-              textformfield(
-                controller: agecontroller,
-                label: "Enter The Your age",
-                texttype: TextInputType.number,
-                max: 2,
-              ),
-              sizedbox(height: 20.0),
-              DropdownButtonFormField(
-                value: Provider.of<AddEditProvider>(context).selectedgroup,
-                items:
-                    Provider.of<AddEditProvider>(context).listItems.map((item) {
-                  return DropdownMenuItem(
-                    value: item,
-                    child: text(data: item),
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  Provider.of<AddEditProvider>(context, listen: false)
-                      .selectedgroup = value.toString();
-                },
-              ),
-              sizedbox(height: 20.0),
-              ElevatedButton(
-                onPressed: () {
-                  addData(context);
-                  Navigator.pop(context);
-                },
-                style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.red),
-                    minimumSize:
-                        MaterialStatePropertyAll(Size(double.infinity, 50))),
-                child: text(data: "SUBMIT", size: 20.0),
-              ),
-            ],
+                  max: 2,
+                ),
+                sizedbox(height: 20.0),
+                DropdownButtonFormField(
+                  value: Provider.of<AddEditProvider>(context).selectedgroup,
+                  items: Provider.of<AddEditProvider>(context)
+                      .listItems
+                      .map((item) {
+                    return DropdownMenuItem(
+                      value: item,
+                      child: text(data: item),
+                    );
+                  }).toList(),
+                  onChanged: (value) {
+                    Provider.of<AddEditProvider>(context, listen: false)
+                        .selectedgroup = value.toString();
+                  },
+                ),
+                sizedbox(height: 20.0),
+                ElevatedButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      addData(context);
+                      Navigator.pop(context);
+                    }
+                  },
+                  style: const ButtonStyle(
+                      backgroundColor: MaterialStatePropertyAll(Colors.red),
+                      minimumSize:
+                          MaterialStatePropertyAll(Size(double.infinity, 50))),
+                  child: text(data: "SUBMIT", size: 20.0),
+                ),
+              ],
+            ),
           ),
         ),
       ),

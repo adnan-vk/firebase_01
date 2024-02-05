@@ -11,6 +11,11 @@ textformfield({controller, label, texttype, data, style, max}) {
     ),
     keyboardType: texttype,
     maxLength: max,
+    validator: (value) {
+      if(value == null || value.isEmpty){
+        return 'Please  $label';
+      }
+    },
   );
 }
 

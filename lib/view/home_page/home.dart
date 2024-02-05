@@ -63,9 +63,12 @@ class HomeScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           sizedbox(height: 5.0),
-                          text(data: 'Phone: ${donor.phone.toString()}', size: 14.0),
+                          text(
+                              data: 'Phone: ${donor.phone.toString()}',
+                              size: 14.0),
                           sizedbox(height: 5.0),
-                          text(data: 'Age: ${donor.age.toString()}', size: 14.0),
+                          text(
+                              data: 'Age: ${donor.age.toString()}', size: 14.0),
                         ],
                       ),
                       trailing: PopupMenuButton(
@@ -74,7 +77,8 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => EditPage(donor: donor, id: id),
+                                builder: (context) =>
+                                    EditPage(donor: donor, id: id),
                               ),
                             );
                           } else if (value == "delete") {
