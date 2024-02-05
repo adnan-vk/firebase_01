@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:practice/controller/add_edit_provider.dart';
+import 'package:practice/controller/image_provider.dart';
 import 'package:practice/model/model.dart';
 import 'package:practice/widgets/widgets.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +17,9 @@ class AddPage extends StatelessWidget {
   TextEditingController phonecontroller = TextEditingController();
   TextEditingController agecontroller = TextEditingController();
 
-  late ImagePicker _imagePicker;
-  File? pickedImage;
-
   @override
   Widget build(BuildContext context) {
-    _imagePicker = ImagePicker();
+    final pro = Provider.of<ImgProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red,
@@ -32,18 +30,21 @@ class AddPage extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              // GestureDetector(
-              //   onTap: () {
-              //     pickimage();
-              //   },
-              //   child:
-              //       circeavatar(
-              //         image: pickedImage!=null ? FileImage(pickedImage!) :
-              //         AssetImage('assets/images/Blood Logo.jpg'),
-              //         radius: 50.0
-              //         // Icon(Icons.add_a_photo), radius: 50.0
-              //         ),
-              // ),
+              Consumer<ImgProvider>(
+                builder: (context, value, child) => GestureDetector(
+                  onTap: () {
+                    pro.pickImage(context);
+                  },
+                  child: circeavatar(
+                    image: value.pickedImage != null
+                        ? FileImage(value.pickedImage!)
+                        : null,
+                    radius: 50.0,
+                    color: Colors.red,
+                    child: Icon(Icons.add_a_photo),
+                  ),
+                ),
+              ),
               sizedbox(height: 20.0),
               textformfield(
                   controller: namecontroller, label: "Enter your Name"),
@@ -104,23 +105,12 @@ class AddPage extends StatelessWidget {
     final phone = int.tryParse(phonecontroller.text.trim());
     final age = int.tryParse(agecontroller.text.trim());
 
-    if (phone == null) {
-      log("Invalid phone number input: $phone");
+    if (phone == null || name.isEmpty || age == null) {
+      log("Invalid Input");
       return;
     }
     final data = BloodModel(
         name: name, phone: phone, group: pro.selectedgroup, age: age);
     pro.addDonor(data);
-  }
-
-  void pickimage() async {
-    final pickFile = await _imagePicker.pickImage(source: ImageSource.gallery);
-
-    if (pickFile != null) {
-      pickedImage = File(pickFile.path);
-      log("image picked");
-    } else {
-      log("image not picked");
-    }
   }
 }

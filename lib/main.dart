@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:practice/controller/add_edit_provider.dart';
 import 'package:practice/controller/home_provider.dart';
+import 'package:practice/controller/image_provider.dart';
 import 'package:practice/service/firebase_options.dart';
 import 'package:practice/view/home_page/home.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AddEditProvider(),
         ),
+        ChangeNotifierProvider(create: (context) => ImgProvider(),)
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
