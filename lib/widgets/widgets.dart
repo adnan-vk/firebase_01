@@ -16,10 +16,11 @@ textformfield({controller, label, texttype, data, style, max, bool ph = true}) {
         return 'Please  $label';
       }
       if (ph == true) {
-        if (value!.length != 10) {
+        if (value.length != 10) {
           return "Please Enter 10 Numbers";
         }
       }
+      return null;
     },
   );
 }
