@@ -46,9 +46,13 @@ class AddPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                sizedbox(height: 20.0),
+                SizedBox(
+                  height: 20,
+                ),
                 textformfield(
-                    controller: namecontroller, label: "Enter your Name"),
+                    ph: false,
+                    controller: namecontroller,
+                    label: "Enter your Name"),
                 const SizedBox(
                   height: 20,
                 ),
@@ -58,14 +62,19 @@ class AddPage extends StatelessWidget {
                     texttype: TextInputType.number,
                     max: 10,
                     data: "+91 "),
-                sizedbox(height: 20.0),
+                SizedBox(
+                  height: 20,
+                ),
                 textformfield(
+                  ph: false,
                   controller: agecontroller,
                   label: "Enter Your age",
                   texttype: TextInputType.number,
                   max: 2,
                 ),
-                sizedbox(height: 20.0),
+                SizedBox(
+                  height: 20,
+                ),
                 DropdownButtonFormField(
                   value: Provider.of<AddEditProvider>(context).selectedgroup,
                   items: Provider.of<AddEditProvider>(context)
@@ -81,7 +90,9 @@ class AddPage extends StatelessWidget {
                         .selectedgroup = value.toString();
                   },
                 ),
-                sizedbox(height: 20.0),
+                SizedBox(
+                  height: 20,
+                ),
                 ElevatedButton(
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
@@ -103,7 +114,7 @@ class AddPage extends StatelessWidget {
     );
   }
 
-  addData(context) {
+  void addData(context) {
     final pro = Provider.of<AddEditProvider>(context, listen: false);
     final proim = Provider.of<ImgProvider>(context, listen: false);
 
@@ -125,7 +136,7 @@ class AddPage extends StatelessWidget {
     pro.addDonor(data);
   }
 
-  pickImage(context) {
+  Future<dynamic> pickImage(context) {
     final pro = Provider.of<ImgProvider>(context, listen: false);
     return showDialog(
       context: context,

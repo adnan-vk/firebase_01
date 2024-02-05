@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-textformfield({controller, label, texttype, data, style, max}) {
+textformfield({controller, label, texttype, data, style, max, bool ph = true}) {
   return TextFormField(
     controller: controller,
     decoration: InputDecoration(
@@ -12,8 +12,13 @@ textformfield({controller, label, texttype, data, style, max}) {
     keyboardType: texttype,
     maxLength: max,
     validator: (value) {
-      if(value == null || value.isEmpty){
+      if (value == null || value.isEmpty) {
         return 'Please  $label';
+      }
+      if (ph == true) {
+        if (value!.length != 10) {
+          return "Please Enter 10 Numbers";
+        }
       }
     },
   );
@@ -30,14 +35,7 @@ text({data, size, color, weight}) {
   );
 }
 
-sizedbox({height, width}) {
-  return SizedBox(
-    height: height,
-    width: width,
-  );
-}
-
-circeavatar({child, radius, color,image}) {
+circeavatar({child, radius, color, image}) {
   return CircleAvatar(
     child: child,
     radius: radius,

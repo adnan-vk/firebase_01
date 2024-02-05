@@ -12,12 +12,12 @@ class AddEditProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  updatedonor(BloodModel donors, [String? id]) async {
+ Future updatedonor(BloodModel donors, [String? id]) async {
     dbService.donor.doc(id).update(donors.tojson());
     notifyListeners();
   }
 
-  delete(id) {
+ void delete(id){
     dbService.donor.doc(id).delete();
     notifyListeners();
   }

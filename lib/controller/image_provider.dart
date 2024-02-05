@@ -10,12 +10,12 @@ class ImgProvider extends ChangeNotifier {
   File? pickedImage;
   DbService dbService = DbService();
   String imageName = DateTime.now().microsecondsSinceEpoch.toString();
-  String downloadUrl = "";
+  String? downloadUrl;
   File? file;
   ImagePicker imagePicker = ImagePicker();
   FirebaseStorage storage = FirebaseStorage.instance;
 
-  addImage(ImageSource source) async {
+  Future addImage(ImageSource source) async {
     try {
       final XFile? pickedFile =
           await imagePicker.pickImage(source: ImageSource.gallery);
@@ -35,7 +35,7 @@ class ImgProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getImage(ImageSource source) async {
+  Future getImage(ImageSource source) async {
     final pickedFile = await picker.pickImage(source: source);
 
     if (pickedFile != null) {
